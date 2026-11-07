@@ -1,0 +1,319 @@
+<!DOCTYPE html>
+<html lang="en" class="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Plan4U AI — Dual-Panel Travel Portal</title>
+  <!-- Tailwind CSS -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          colors: {
+            brand: {
+              50: '#f0fdf4',
+              500: '#10b981',
+              600: '#059669',
+              700: '#047857',
+            },
+            accent: {
+              500: '#f59e0b',
+              600: '#d97706',
+            }
+          }
+        }
+      }
+    }
+  </script>
+  <!-- Lucide Icons -->
+  <script src="https://unpkg.com/lucide@latest"></script>
+  <!-- Marked Markdown Parser -->
+  <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+  <!-- Custom Styles -->
+  <link rel="stylesheet" href="styles.css?v=6.0">
+</head>
+<body class="bg-slate-950 text-slate-100 min-h-screen flex flex-col font-sans antialiased selection:bg-brand-500 selection:text-white">
+
+  <!-- TOP HEADER -->
+  <header class="border-b border-slate-800/80 bg-slate-900/60 backdrop-blur-md sticky top-0 z-50 px-4 lg:px-8 py-3.5 flex items-center justify-between">
+    <!-- Brand -->
+    <div class="flex items-center space-x-3">
+      <div class="w-10 h-10 rounded-xl bg-gradient-to-tr from-brand-600 via-teal-500 to-accent-500 flex items-center justify-center shadow-lg shadow-brand-500/20">
+        <i data-lucide="compass" class="w-6 h-6 text-white animate-spin-slow"></i>
+      </div>
+      <div>
+        <div class="flex items-center space-x-2">
+          <h1 class="text-xl font-bold tracking-tight bg-gradient-to-r from-white via-slate-200 to-slate-400 bg-clip-text text-transparent">Plan4U</h1>
+          <span class="px-2 py-0.5 text-xs font-semibold rounded-full bg-brand-500/20 text-brand-400 border border-brand-500/30">AI Live Engine</span>
+        </div>
+        <p class="text-xs text-slate-400 hidden sm:block">Dual-Panel Multi-Agent Travel Planner & Live Companion</p>
+      </div>
+    </div>
+
+    <!-- MODE SWITCHER TABS -->
+    <div class="flex items-center bg-slate-950/80 p-1 rounded-xl border border-slate-800 shadow-inner">
+      <button id="tab-mode-companion" onclick="switchMode('companion')" class="tab-btn active flex items-center space-x-2 px-4 py-2 rounded-lg text-sm font-semibold transition-all duration-200 text-white">
+        <i data-lucide="sparkles" class="w-4 h-4 text-accent-400"></i>
+        <span>Live In-Trip Copilot</span>
+        <span class="text-[10px] uppercase font-bold tracking-wider px-1.5 py-0.5 rounded bg-accent-500/20 text-accent-300">Panel 2</span>
+      </button>
+
+      <button id="tab-mode-planner" onclick="switchMode('planner')" class="tab-btn flex items-center space-x-2 px-4 py-2 rounded-lg text-sm font-medium transition-all duration-200 text-slate-400 hover:text-white">
+        <i data-lucide="map" class="w-4 h-4"></i>
+        <span>Long Itinerary Plan</span>
+        <span class="text-[10px] uppercase font-bold tracking-wider px-1.5 py-0.5 rounded bg-brand-500/20 text-brand-300">Panel 1</span>
+      </button>
+    </div>
+
+    <!-- BACKEND STATUS PILL -->
+    <div class="flex items-center space-x-3">
+      <div id="backend-status-pill" class="flex items-center space-x-2 px-3 py-1.5 rounded-full bg-slate-900 border border-slate-800 text-xs">
+        <span class="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></span>
+        <span id="backend-status-text" class="text-slate-300 font-mono">Connecting...</span>
+      </div>
+    </div>
+  </header>
+
+  <!-- MAIN WRAPPER -->
+  <main class="flex-1 max-w-7xl w-full mx-auto p-4 lg:p-6 flex flex-col">
+
+    <!-- ================================================================= -->
+    <!-- MODE 1: MASTER PRE-TRIP PLANNER (LONG ITINERARY CHAT PORTAL)      -->
+    <!-- ================================================================= -->
+    <section id="panel-planner" class="mode-view hidden flex-1 flex flex-col">
+      
+      <!-- Top Info Bar with Quick Inspiration Chips -->
+      <div class="bg-slate-900/80 border border-slate-800 rounded-2xl p-3.5 mb-4 flex flex-col md:flex-row md:items-center justify-between gap-3 shadow-md">
+        <div class="flex items-center space-x-3">
+          <div class="w-10 h-10 rounded-xl bg-brand-500/10 border border-brand-500/30 flex items-center justify-center text-brand-400">
+            <i data-lucide="compass" class="w-5 h-5"></i>
+          </div>
+          <div>
+            <div class="flex items-center space-x-2">
+              <span class="text-xs font-bold text-white uppercase tracking-wider">Master Pre-Trip Macro Planner</span>
+              <span class="px-1.5 py-0.2 bg-brand-500/20 text-brand-300 text-[10px] font-bold rounded">AI Multi-Agent Chat</span>
+            </div>
+            <p class="text-[11px] text-slate-400">Chat with AI to synthesize 10k Flights, 10k Hotels, Monuments, Dining & 15-min Razorpay Locks into an optimized plan.</p>
+          </div>
+        </div>
+
+        <!-- Quick Inspiration Chips -->
+        <div class="flex items-center flex-wrap gap-1.5 text-xs">
+          <span class="text-slate-400 font-medium text-[11px]">Quick Ideas:</span>
+          <button onclick="sendPlannerQuickPrompt('Delhi se Jaipur 3 din ke liye trip bnao, budget 35k hai, 2 log hain')" class="preset-pill text-[11px] py-1 px-2.5">Jaipur Heritage (3D) 🏰</button>
+          <button onclick="sendPlannerQuickPrompt('Bangalore to Goa 3 days trip for 2 people with beach shacks, budget 35k')" class="preset-pill text-[11px] py-1 px-2.5">Goa Beaches (3D) 🏖️</button>
+          <button onclick="sendPlannerQuickPrompt('Mumbai se Udaipur 3 din royal heritage tour, budget 45k')" class="preset-pill text-[11px] py-1 px-2.5">Udaipur Royal (3D) 👑</button>
+          <button onclick="sendPlannerQuickPrompt('Delhi to Kochi 3 days backwaters trip for 2 people, budget 40k')" class="preset-pill text-[11px] py-1 px-2.5">Kochi Backwaters (3D) 🌴</button>
+        </div>
+      </div>
+
+      <!-- Chat Container -->
+      <div class="flex-1 bg-slate-900/40 border border-slate-800 rounded-2xl p-4 flex flex-col overflow-hidden min-h-[580px] shadow-2xl relative">
+        <!-- Messages Scrollable Area -->
+        <div id="planner-chat-messages" class="flex-1 overflow-y-auto space-y-4 pr-2 pb-2">
+          <!-- Initial Welcome Message -->
+          <div class="flex items-start space-x-3 max-w-3xl">
+            <div class="w-8 h-8 rounded-full bg-gradient-to-tr from-brand-600 to-teal-400 flex items-center justify-center shrink-0 shadow">
+              <i data-lucide="bot" class="w-4 h-4 text-white"></i>
+            </div>
+            <div class="bg-slate-800/90 border border-slate-700/80 rounded-2xl rounded-tl-none p-4 text-sm text-slate-200 shadow-md space-y-2">
+              <div class="font-bold text-white text-sm flex items-center gap-1.5">
+                <span>Namaste! Main hoon aapka AI Master Trip Planner.</span> ✈️
+              </div>
+              <p class="text-xs leading-relaxed text-slate-300">
+                Aapko kahan ghoomne jaana hai? Mujhe bas natural bhasha mein batao — jaise:
+                <br><br>
+                💬 <strong class="text-brand-300 font-mono">"Delhi se Jaipur 3 din ke liye trip plan kar de, budget 35k hai, 2 log hain"</strong>
+                <br>
+                💬 <strong class="text-teal-300 font-mono">"Plan a 3-day beach trip to Goa from Bangalore under 40k with nightlife"</strong>
+              </p>
+              <p class="text-[11px] text-slate-400 pt-1 border-t border-slate-700/60">
+                Main real 10,000 flights, 10,000 hotels, handpicked local dining, monuments, aur 15-minute Razorpay hold ke sath complete itinerary taiyar kar dunga!
+              </p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Chat Input Bar -->
+        <div class="pt-3 border-t border-slate-800">
+          <form id="planner-chat-form" onsubmit="handlePlannerSendMessage(event)" class="flex items-center space-x-2">
+            <div class="relative flex-1">
+              <input 
+                type="text" 
+                id="planner-chat-input" 
+                required 
+                placeholder="Describe your trip (e.g. Delhi se Jaipur 3 din budget 35k)..." 
+                class="w-full bg-slate-950/80 border border-slate-700 rounded-xl px-4 py-3 text-sm text-white placeholder-slate-500 focus:outline-none focus:border-brand-500 transition"
+              >
+            </div>
+            <button 
+              type="submit" 
+              id="btn-planner-send" 
+              class="bg-gradient-to-r from-brand-600 to-teal-600 hover:from-brand-500 hover:to-teal-500 text-white font-bold p-3 rounded-xl transition shadow-lg shadow-brand-600/30 shrink-0"
+            >
+              <i data-lucide="send" class="w-5 h-5"></i>
+            </button>
+          </form>
+        </div>
+      </div>
+    </section>
+
+
+    <!-- ================================================================= -->
+    <!-- MODE 2: LIVE IN-TRIP COPILOT (COMPANION)                          -->
+    <!-- ================================================================= -->
+    <section id="panel-companion" class="mode-view flex-1 flex flex-col">
+      
+      <!-- GPS Context Bar with Real-Time "Locate Me" -->
+      <div class="bg-slate-900/80 border border-slate-800 rounded-2xl p-3.5 mb-4 flex flex-col md:flex-row md:items-center justify-between gap-3 shadow-md">
+        <div class="flex items-center space-x-3">
+          <div id="gps-status-icon" class="w-8 h-8 rounded-lg bg-accent-500/20 border border-accent-500/30 flex items-center justify-center text-accent-400 shrink-0">
+            <i data-lucide="navigation" class="w-4 h-4 animate-bounce"></i>
+          </div>
+          <div>
+            <div class="flex items-center space-x-2">
+              <span class="text-xs font-bold text-white uppercase tracking-wider">Live On-Trip GPS Location</span>
+              <span id="gps-active-badge" class="px-1.5 py-0.2 text-[10px] font-semibold bg-emerald-500/20 text-emerald-400 rounded">Active</span>
+            </div>
+            <p id="gps-display-label" class="text-xs text-slate-400">Near Hawa Mahal, Jaipur (26.9239° N, 75.8267° E)</p>
+          </div>
+        </div>
+
+        <!-- Real-Time Geolocation & Locality Presets -->
+        <div class="flex items-center flex-wrap gap-2 text-xs">
+          <!-- Real-Time Locate Me Button -->
+          <button id="btn-locate-me" onclick="handleLocateMe()" class="px-3 py-1.5 bg-gradient-to-r from-emerald-600 to-teal-600 hover:from-emerald-500 hover:to-teal-500 text-white rounded-lg font-bold text-xs flex items-center gap-1.5 shadow transition cursor-pointer" title="Detect your real device location using GPS">
+            <i data-lucide="crosshair" class="w-3.5 h-3.5"></i>
+            <span id="locate-me-text">Locate Me 🎯</span>
+          </button>
+
+          <!-- Live Watch GPS Toggle -->
+          <button id="btn-watch-gps" onclick="toggleLiveGpsWatch()" class="px-2.5 py-1.5 bg-slate-800 hover:bg-slate-700 text-slate-300 rounded-lg text-xs font-semibold flex items-center gap-1 border border-slate-700 transition cursor-pointer" title="Auto-update location in real time as you travel">
+            <span id="watch-gps-dot" class="w-2 h-2 rounded-full bg-slate-500"></span>
+            <span id="watch-gps-text">Live Track</span>
+          </button>
+
+          <!-- Quick Presets -->
+          <span class="text-slate-500 text-[11px] ml-1">Presets:</span>
+          <button onclick="setGpsLocation(28.7033, 77.1325, 'Pitampura, Delhi')" class="gps-preset-pill">📍 Pitampura</button>
+          <button onclick="setGpsLocation(28.5921, 77.0460, 'Dwarka, Delhi')" class="gps-preset-pill">📍 Dwarka</button>
+          <button onclick="setGpsLocation(28.6315, 77.2167, 'Connaught Place, Delhi')" class="gps-preset-pill">📍 CP</button>
+          <button onclick="setGpsLocation(26.9239, 75.8267, 'Hawa Mahal, Jaipur')" class="gps-preset-pill">📍 Jaipur</button>
+          <button onclick="setGpsLocation(18.9067, 72.8147, 'Colaba, Mumbai')" class="gps-preset-pill">📍 Mumbai</button>
+          <button onclick="setGpsLocation(15.5178, 73.7667, 'Candolim, Goa')" class="gps-preset-pill">📍 Goa</button>
+        </div>
+      </div>
+
+      <!-- Chat Container -->
+      <div class="flex-1 bg-slate-900/60 border border-slate-800/80 rounded-2xl flex flex-col overflow-hidden shadow-2xl min-h-[550px]">
+        <!-- Chat Header Bar with Clear/New Chat Button and Swiggy MCP Integration -->
+        <div class="px-4 py-2.5 bg-slate-950/70 border-b border-slate-800/80 flex items-center justify-between">
+          <div class="flex items-center space-x-2">
+            <span class="w-2 h-2 rounded-full bg-emerald-400"></span>
+            <span class="text-xs font-bold text-slate-200">Live Copilot</span>
+            <span class="text-[10px] text-slate-400 hidden sm:inline">• Multi-Turn Memory Active</span>
+          </div>
+          <div class="flex items-center space-x-2">
+            <!-- Swiggy MCP Auth Status Pill -->
+            <div id="swiggy-auth-container" class="flex items-center">
+              <button onclick="handleSwiggyConnect()" class="px-2.5 py-1 bg-orange-500/20 hover:bg-orange-500 text-orange-400 hover:text-white rounded-lg border border-orange-500/40 text-xs font-bold flex items-center gap-1 transition shadow cursor-pointer" title="Connect Swiggy MCP for 1-click food delivery & table booking">
+                <span>🛵 Connect Swiggy</span>
+              </button>
+            </div>
+            <button onclick="handleStartNewChat()" title="Start a fresh conversation and reset memory" class="px-3 py-1 bg-slate-800 hover:bg-slate-700 text-slate-200 hover:text-white rounded-lg border border-slate-700 hover:border-brand-500/50 text-xs font-semibold flex items-center gap-1.5 transition shadow cursor-pointer">
+              <i data-lucide="plus-circle" class="w-3.5 h-3.5 text-brand-400"></i>
+              <span>+ New Chat</span>
+            </button>
+          </div>
+        </div>
+        
+        <!-- Chat History -->
+        <div id="chat-messages" class="flex-1 overflow-y-auto p-4 md:p-6 space-y-4">
+          <!-- Welcome Message -->
+          <div class="flex items-start space-x-3 max-w-2xl">
+            <div class="w-8 h-8 rounded-full bg-gradient-to-tr from-brand-600 to-teal-400 flex items-center justify-center shrink-0 shadow">
+              <i data-lucide="bot" class="w-4 h-4 text-white"></i>
+            </div>
+            <div class="bg-slate-800/90 border border-slate-700/80 rounded-2xl rounded-tl-none p-4 text-sm text-slate-200 shadow-md">
+              <p class="font-semibold text-white mb-1">Hey buddy! Main aapka live in-trip copilot hoon. 🚀</p>
+              <p>Aap ground par kahin bhi ho — koi spontaneous street food craving ho, tez baarish ho jaye, ticket counter pe lambi bheed ho, ya shaam ka live concert dhoondhna ho — bas mujhe bolo!</p>
+              <div class="mt-3 pt-2 border-t border-slate-700/60 flex items-center space-x-2 text-xs text-brand-400 font-medium">
+                <i data-lucide="map-pin" class="w-3.5 h-3.5"></i>
+                <span id="welcome-loc-text">Synced to your live GPS coordinates near Hawa Mahal, Jaipur.</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Quick Prompt Chips -->
+        <div class="px-4 py-2 bg-slate-950/40 border-t border-slate-800/80 flex items-center gap-2 overflow-x-auto no-scrollbar text-xs">
+          <span class="text-slate-400 font-semibold shrink-0">Try asking:</span>
+          <button onclick="sendQuickPrompt('Bhai Hawa Mahal ke paas mast lassi ya kachori khilao 🤤')" class="quick-chip">
+            Kachori & Lassi near me 🤤
+          </button>
+          <button onclick="sendQuickPrompt('Yaar achanak tez baarish shuru ho gayi! Koi acchi covered indoor place aur cafe batao 🌧️')" class="quick-chip">
+            Heavy Rain Reroute 🌧️
+          </button>
+          <button onclick="sendQuickPrompt('Amber Fort ticket counter pe bohot lambi bheed hai, fast-track digital pass generate karo ⚡')" class="quick-chip">
+            Instant Monument Pass ⚡
+          </button>
+          <button onclick="sendQuickPrompt('Aaj raat koi live music gig ya comedy show chal raha hai kya? 🎟️')" class="quick-chip">
+            Live Concerts / Shows 🎟️
+          </button>
+        </div>
+
+        <!-- Chat Input Bar -->
+        <div class="p-3 bg-slate-950/80 border-t border-slate-800/80">
+          <form id="chat-form" onsubmit="handleSendChat(event)" class="flex items-center space-x-2">
+            <div class="relative flex-1">
+              <input type="text" id="chat-input" required autocomplete="off" placeholder="Ask for food, live events, instant passes, or rain rerouting..." class="w-full bg-slate-900 border border-slate-800 focus:border-brand-500 rounded-xl px-4 py-3 text-sm text-white placeholder-slate-500 focus:outline-none focus:ring-1 focus:ring-brand-500 transition shadow-inner">
+            </div>
+            <button type="submit" id="btn-chat-send" class="bg-brand-600 hover:bg-brand-500 text-white font-bold px-5 py-3 rounded-xl transition shadow-lg shadow-brand-600/30 flex items-center space-x-1 shrink-0">
+              <i data-lucide="send" class="w-4 h-4"></i>
+              <span class="hidden sm:inline text-sm">Send</span>
+            </button>
+          </form>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- MODAL / POPUP FOR FAST-TRACK PASSES & RAZORPAY SIMULATION -->
+  <div id="booking-modal" class="hidden fixed inset-0 z-50 bg-black/80 backdrop-blur-sm flex items-center justify-center p-4">
+    <div class="bg-slate-900 border border-slate-800 rounded-2xl max-w-md w-full p-6 space-y-4 shadow-2xl relative animate-scale-up">
+      <button onclick="closeBookingModal()" class="absolute top-4 right-4 text-slate-400 hover:text-white">
+        <i data-lucide="x" class="w-5 h-5"></i>
+      </button>
+
+      <div class="flex items-center space-x-3">
+        <div id="modal-icon-badge" class="w-12 h-12 rounded-xl bg-brand-500/20 border border-brand-500/40 flex items-center justify-center text-brand-400">
+          <i data-lucide="check-circle" class="w-6 h-6"></i>
+        </div>
+        <div>
+          <h3 id="modal-title" class="text-base font-bold text-white">15-Minute Booking Lock</h3>
+          <p id="modal-subtitle" class="text-xs text-slate-400">Secured via Plan4U GDS & Razorpay</p>
+        </div>
+      </div>
+
+      <div id="modal-content" class="bg-slate-950 p-4 rounded-xl border border-slate-800/80 space-y-2 text-xs font-mono">
+        <!-- Injected -->
+      </div>
+
+      <div class="pt-2 flex items-center space-x-2">
+        <button id="modal-payment-btn" onclick="simulateSuccessfulPayment()" class="flex-1 bg-brand-600 hover:bg-brand-500 text-white font-bold py-2.5 rounded-xl text-sm transition">
+          Simulate Razorpay Payment
+        </button>
+        <button id="modal-close-btn" onclick="closeBookingModal()" class="px-4 py-2.5 bg-slate-800 hover:bg-slate-700 text-slate-300 font-semibold rounded-xl text-sm transition">
+          Close
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- SCRIPT -->
+  <script src="app.js?v=27.0"></script>
+</body>
+</html>

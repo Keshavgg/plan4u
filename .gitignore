@@ -1,0 +1,37 @@
+# Environment & Secrets
+.env
+*.env
+!.env.example
+
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+env/
+venv/
+.venv/
+ENV/
+build/
+dist/
+*.egg-info/
+
+# Databases & local persistent storage
+data_store/*.db
+data_store/*.sqlite*
+data_store/.swiggy_token_key
+data_store/*.log
+*.db
+*.sqlite
+*.sqlite3
+
+# IDE & Editor
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# OS
+.DS_Store
+Thumbs.db

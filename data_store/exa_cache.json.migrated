@@ -1,0 +1,160 @@
+{
+  "movies:national-capital-region-ncr:movies_tomorrow_in_d": {
+    "timestamp": 1793447691.13812,
+    "data": [
+      {
+        "id": "bms_live_pehla_pyaar_doosri_baar",
+        "title": "Pehla Pyaar Doosri Baar",
+        "category": "movie",
+        "venue": "PVR Superplex, Vegas Mall (Sec 14, Dwarka)",
+        "date_time": "Tomorrow | Shows: 3:15 PM, 6:30 PM, 9:45 PM",
+        "min_price_inr": 220.0,
+        "price_range_inr": "\u20b9220 - \u20b9550",
+        "is_free": false,
+        "description": "Currently playing live on big screens in Delhi. Real-time booking available on BookMyShow.",
+        "booking_provider": "BookMyShow",
+        "booking_url": "https://in.bookmyshow.com/explore/search?q=Pehla%20Pyaar%20Doosri%20Baar"
+      },
+      {
+        "id": "bms_live_namit_malhotra_s_ramayana",
+        "title": "Namit Malhotra's Ramayana",
+        "category": "movie",
+        "venue": "Cinepolis Janak Cinema / PVR Pacific Mall",
+        "date_time": "Tomorrow | Shows: 4:00 PM, 7:15 PM, 10:15 PM",
+        "min_price_inr": 220.0,
+        "price_range_inr": "\u20b9220 - \u20b9550",
+        "is_free": false,
+        "description": "Currently playing live on big screens in Delhi. Real-time booking available on BookMyShow.",
+        "booking_provider": "BookMyShow",
+        "booking_url": "https://in.bookmyshow.com/explore/search?q=Namit%20Malhotra%27s%20Ramayana"
+      },
+      {
+        "id": "bms_live_udta_teer",
+        "title": "Udta Teer",
+        "category": "movie",
+        "venue": "PVR Superplex, Vegas Mall (Sec 14, Dwarka)",
+        "date_time": "Tomorrow | Shows: 5:30 PM, 8:45 PM",
+        "min_price_inr": 220.0,
+        "price_range_inr": "\u20b9220 - \u20b9550",
+        "is_free": false,
+        "description": "Currently playing live on big screens in Delhi. Real-time booking available on BookMyShow.",
+        "booking_provider": "BookMyShow",
+        "booking_url": "https://in.bookmyshow.com/explore/search?q=Udta%20Teer"
+      }
+    ]
+  },
+  "movies:national-capital-region-ncr:movie_in_dwarka_delh": {
+    "timestamp": 1793447702.5772119,
+    "data": [
+      {
+        "id": "bms_live_pehla_pyaar_doosri_baar",
+        "title": "Pehla Pyaar Doosri Baar",
+        "category": "movie",
+        "venue": "PVR Superplex, Vegas Mall (Sec 14, Dwarka)",
+        "date_time": "Tomorrow | Shows: 3:15 PM, 6:30 PM, 9:45 PM",
+        "min_price_inr": 220.0,
+        "price_range_inr": "\u20b9220 - \u20b9550",
+        "is_free": false,
+        "description": "Currently playing live on big screens in Delhi. Real-time booking available on BookMyShow.",
+        "booking_provider": "BookMyShow",
+        "booking_url": "https://in.bookmyshow.com/explore/search?q=Pehla%20Pyaar%20Doosri%20Baar"
+      },
+      {
+        "id": "bms_live_namit_malhotra_s_ramayana",
+        "title": "Namit Malhotra's Ramayana",
+        "category": "movie",
+        "venue": "Cinepolis Janak Cinema / PVR Pacific Mall",
+        "date_time": "Tomorrow | Shows: 4:00 PM, 7:15 PM, 10:15 PM",
+        "min_price_inr": 220.0,
+        "price_range_inr": "\u20b9220 - \u20b9550",
+        "is_free": false,
+        "description": "Currently playing live on big screens in Delhi. Real-time booking available on BookMyShow.",
+        "booking_provider": "BookMyShow",
+        "booking_url": "https://in.bookmyshow.com/explore/search?q=Namit%20Malhotra%27s%20Ramayana"
+      },
+      {
+        "id": "bms_live_udta_teer",
+        "title": "Udta Teer",
+        "category": "movie",
+        "venue": "PVR Superplex, Vegas Mall (Sec 14, Dwarka)",
+        "date_time": "Tomorrow | Shows: 5:30 PM, 8:45 PM",
+        "min_price_inr": 220.0,
+        "price_range_inr": "\u20b9220 - \u20b9550",
+        "is_free": false,
+        "description": "Currently playing live on big screens in Delhi. Real-time booking available on BookMyShow.",
+        "booking_provider": "BookMyShow",
+        "booking_url": "https://in.bookmyshow.com/explore/search?q=Udta%20Teer"
+      },
+      {
+        "id": "bms_live_clayface",
+        "title": "Clayface",
+        "category": "movie",
+        "venue": "Cinepolis Janak Cinema / PVR Pacific Mall",
+        "date_time": "Tomorrow | Shows: 2:30 PM, 6:00 PM, 9:15 PM",
+        "min_price_inr": 220.0,
+        "price_range_inr": "\u20b9220 - \u20b9550",
+        "is_free": false,
+        "description": "Currently playing live on big screens in Delhi. Real-time booking available on BookMyShow.",
+        "booking_provider": "BookMyShow",
+        "booking_url": "https://in.bookmyshow.com/explore/search?q=Clayface"
+      }
+    ]
+  },
+  "events:jaipur:events_comedy_live_music_night": {
+    "timestamp": 1793447893.773864,
+    "data": [
+      {
+        "id": "exa_bitmela_ft_aashish_solanki_liv_dis",
+        "title": "Bitmela ft. Aashish Solanki Live, Mela & DJ Night",
+        "category": "nightlife",
+        "venue": "the InterContinental Jaipur.",
+        "date_time": "Sat, 31 Oct, 5:00 PM",
+        "min_price_inr": 499.0,
+        "price_range_inr": "\u20b9499 onwards",
+        "is_free": false,
+        "description": "Book tickets to Bitmela ft. Aashish Solanki Live, Mela & DJ Night",
+        "booking_provider": "District",
+        "booking_url": "https://www.district.in/events/bitmela-ft-aashish-solanki-live-mela-dj-night-oct31-2026-buy-tickets"
+      },
+      {
+        "id": "exa_dark_jokes_only_jaipur_comedy__dis",
+        "title": "Dark Jokes Only\n\nJaipur Comedy Club",
+        "category": "nightlife",
+        "venue": "| A Storytelling Comedy",
+        "date_time": "Sat, 31 Oct, 5:00 PM",
+        "min_price_inr": 499.0,
+        "price_range_inr": "\u20b9149",
+        "is_free": false,
+        "description": "Book Tickets for Comedy in Jaipur Now! | District",
+        "booking_provider": "District",
+        "booking_url": "https://www.district.in/events/comedy-this-weekend-in-jaipur"
+      },
+      {
+        "id": "exa_best_of_jaipur_boo",
+        "title": "Best of Jaipur",
+        "category": "comedy",
+        "venue": "Ticket\n\nJaipur Comedy Club, Jaipur",
+        "date_time": "Sat 31 Oct | 09:00 PM",
+        "min_price_inr": 499.0,
+        "price_range_inr": "\u20b9149",
+        "is_free": false,
+        "description": "Jaipur Comedy Club: Jaipur Sat 31 Oct | 09:00 PM",
+        "booking_provider": "BookMyShow",
+        "booking_url": "https://in.bookmyshow.com/events/best-of-jaipur/ET00520205/ticket/JCCJ/14017"
+      },
+      {
+        "id": "exa_pasandida_aurat_a_storytelling_dis",
+        "title": "Pasandida Aurat | A Storytelling Comedy",
+        "category": "comedy",
+        "venue": "| A Storytelling Comedy",
+        "date_time": "Sat, 31 Oct, 7:00 PM",
+        "min_price_inr": 499.0,
+        "price_range_inr": "\u20b9499 onwards",
+        "is_free": false,
+        "description": "Book tickets to Pasandida Aurat | A Storytelling Comedy",
+        "booking_provider": "District",
+        "booking_url": "https://www.district.in/events/pasandida-aurat-a-storytelling-comedy-oct31-2026-buy-tickets"
+      }
+    ]
+  }
+}
